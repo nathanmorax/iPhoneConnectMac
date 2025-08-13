@@ -31,6 +31,11 @@ struct ContentView: View {
                         bonjourClient.disconnect()
                     }
                     .buttonStyle(.bordered)
+                    
+                    Button("Enviar mensaje") {
+                        bonjourClient.sendMessageToMac("Hola desde el iPhone!")
+                    }
+                    .buttonStyle(.bordered)
                 }
             } else {
                 Button("Conectar a Mac") {

@@ -151,6 +151,12 @@ class BonjourClient: ObservableObject {
         statusMessage = "Desconectado"
     }
     
+    func sendMessageToMac(_ mensaje: String = "Hola desde el iPhone") {
+        let comando = "say \(mensaje)"
+        send(message: comando)
+    }
+
+    
     deinit {
         disconnect()
     }
