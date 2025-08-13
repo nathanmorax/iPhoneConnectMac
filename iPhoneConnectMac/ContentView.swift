@@ -6,6 +6,8 @@
 //
 import SwiftUI
 
+import SwiftUI
+
 struct ContentView: View {
     @StateObject private var bonjourClient = BonjourClient()
     
@@ -16,27 +18,49 @@ struct ContentView: View {
                 .multilineTextAlignment(.center)
             
             if bonjourClient.isConnected {
-                VStack {
+                VStack(spacing: 15) {
                     Button("Apagar Mac") {
                         bonjourClient.sendShutdown()
                     }
-                    .buttonStyle(.borderedProminent)
                     
-                    Button("Reiniciar Mac") {
-                        bonjourClient.sendRestart()
+                    // Trackpad integrado con función de gesto
+                    TrackpadView { gesture in
+                        switch gesture {
+                        case "up":
+                            bonjourClient.sendKeyCodeToMac("key code 126")
+                        case "down":
+                            bonjourClient.sendKeyCodeToMac("key code 125")
+                        case "left":
+                            bonjourClient.sendKeyCodeToMac("key code 123")
+                        case "right":
+                            bonjourClient.sendKeyCodeToMac("key code 124")
+                        case "enter":
+                            bonjourClient.sendKeyCodeToMac("key code 36")
+                        case "click":
+                            bonjourClient.sendKeyCodeToMac("mouse click")
+                        default:
+                            break
+                        }
                     }
-                    .buttonStyle(.borderedProminent)
                     
-                    Button("Desconectar") {
-                        bonjourClient.disconnect()
+                    Button("Abrir Apple Music") {
+                        bonjourClient.openAppleMusicOnMac()
                     }
-                    .buttonStyle(.bordered)
+                    
+                    Button("Cerrar Apple Music") {
+                        bonjourClient.closeAppleMusicOnMac()
+                    }
+                    
+                    Button("Play Apple Music") {
+                        bonjourClient.playMusicOnMac()
+                    }
                     
                     Button("Enviar mensaje") {
                         bonjourClient.sendMessageToMac("Hola desde el iPhone!")
                     }
-                    .buttonStyle(.bordered)
                 }
+                .buttonStyle(.borderedProminent)
+                
             } else {
                 Button("Conectar a Mac") {
                     bonjourClient.connectDirectly()
@@ -48,3 +72,29 @@ struct ContentView: View {
     }
 }
 
+struct TrackpadView: View {
+    var onGesture: (String) -> Void
+    
+    var body: some View {
+        Rectangle()
+            .fill(Color.gray.opacity(0.8))
+            .gesture(
+                DragGesture()
+                    .onEnded { value in
+                        let dx = value.translation.width
+                        let dy = value.translation.height
+                        
+                        if abs(dx) > abs(dy) {
+                            onGesture(dx > 0 ? "right" : "left")
+                        } else {
+                            onGesture(dy > 0 ? "down" : "up")
+                        }
+                    }
+            )
+            .onTapGesture {
+                onGesture("click")
+            }
+            .frame(height: 300)
+            .cornerRadius(12)
+    }
+}

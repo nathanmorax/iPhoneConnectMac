@@ -155,6 +155,31 @@ class BonjourClient: ObservableObject {
         let comando = "say \(mensaje)"
         send(message: comando)
     }
+    
+    func sendMScrolloMac(_ mensaje: String = "Hola desde el iPhone") {
+        let comando = "say \(mensaje)"
+        send(message: comando)
+    }
+    
+    func sendCloseAppMac() {
+        send(message: "exit")
+    }
+
+    func openAppleMusicOnMac() {
+        send(message: "open music")
+    }
+
+    func closeAppleMusicOnMac() {
+        send(message: "close music")
+    }
+    
+    func playMusicOnMac() {
+        send(message: "play music")
+    }
+
+    func sendKeyCodeToMac(_ code: String) {
+        send(message: code)
+    }
 
     
     deinit {
