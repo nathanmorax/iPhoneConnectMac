@@ -11,128 +11,122 @@ struct ContentView: View {
     @State private var isPlaying = false
     
     var body: some View {
-        VStack(spacing: 20) {
-            Text(bonjourClient.statusMessage)
-                .padding()
-                .multilineTextAlignment(.center)
-            
-            Text(bonjourClient.nameMac)
-            
-            if bonjourClient.isConnected {
-                VStack(spacing: 15) {
-                    Button("Apagar Mac") {
-                        bonjourClient.sendShutdown()
-                    }
-                    
-                    // Trackpad integrado con función de gesto
-                    TrackpadView { gesture in
-                        switch gesture {
-                        case "up":
-                            bonjourClient.sendKeyCodeToMac("key code 126")
-                        case "down":
-                            bonjourClient.sendKeyCodeToMac("key code 125")
-                        case "left":
-                            bonjourClient.sendKeyCodeToMac("key code 123")
-                        case "right":
-                            bonjourClient.sendKeyCodeToMac("key code 124")
-                        case "enter":
-                            bonjourClient.sendKeyCodeToMac("key code 36")
-                        default:
-                            break
+        ZStack {
+            Color.black.ignoresSafeArea()
+            VStack(spacing: 20) {
+                Text(bonjourClient.statusMessage)
+                    .padding()
+                    .multilineTextAlignment(.center)
+                
+                Text(bonjourClient.nameMac)
+                
+                if bonjourClient.isConnected {
+                    VStack(spacing: 15) {
+                        Button("Apagar Mac") {
+                            bonjourClient.sendShutdown()
                         }
-                    }
-                    
-                    /*Button("Abrir Apple Music") {
-                        bonjourClient.openAppleMusicOnMac()
-                    }
-                    
-                    Button("Cerrar Apple Music") {
-                        bonjourClient.closeAppleMusicOnMac()
-                    }
-                    
-                    Button("Play Apple Music") {
-                        bonjourClient.playMusicOnMac()
-                    }
-                    
-                    Button("Enviar mensaje") {
-                        bonjourClient.sendMessageToMac("Hola desde el iPhone!")
-                    }*/
-                    
-                    HStack {
-                        VStack {
-                            Button {
-                                bonjourClient.rewind15SecondsOnMac("key code 123")
-                            } label: {
-                                Image(systemName: "15.arrow.trianglehead.counterclockwise")
+                        
+                        // Trackpad integrado con función de gesto
+                        TrackpadView { gesture in
+                            switch gesture {
+                            case "up":
+                                bonjourClient.sendKeyCodeToMac("key code 126")
+                            case "down":
+                                bonjourClient.sendKeyCodeToMac("key code 125")
+                            case "left":
+                                bonjourClient.sendKeyCodeToMac("key code 123")
+                            case "right":
+                                bonjourClient.sendKeyCodeToMac("key code 124")
+                            case "enter":
+                                bonjourClient.sendKeyCodeToMac("key code 36")
+                            default:
+                                break
                             }
-                            .buttonStyle(.plain)
                         }
-                        .padding()
+                        
+                        HStack(spacing: 24) {
+                            VStack {
+                                Button {
+                                    bonjourClient.rewind15SecondsOnMac("key code 123")
+                                } label: {
+                                    Image(systemName: "15.arrow.trianglehead.counterclockwise")
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            .padding()
+                            
+                            
+                            HStack {
+                                Button {
+                                    isPlaying.toggle()
+                                    bonjourClient.sendKeyCodeToMac("mouse click")
+                                } label: {
+                                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                                        .resizable() // permite ajustar el tamaño libremente
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(width: 36, height: 36)
+                                    
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            
+                            
+                            VStack {
+                                Button {
+                                    bonjourClient.rewind15SecondsOnMac("key code 124")
+                                } label: {
+                                    Image(systemName: "15.arrow.trianglehead.clockwise")
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            .padding()
+                            
+                        }
+                        .padding(.vertical, 14)
+                        .padding(.horizontal, 40)
                         .background(.gray)
                         .cornerRadius(8)
+                        
+                        
                         
                         HStack {
-                            Button {
-                                isPlaying.toggle()
-                                bonjourClient.sendKeyCodeToMac("mouse click")
-                            } label: {
-                                Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                            VStack {
+                                Button {
+                                    bonjourClient.decreaseVolume()
+                                } label: {
+                                    Image(systemName: "speaker.wave.1.fill")
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
-                        }
-                        .padding(.all, 24)
-                        .background(.gray)
-                        .cornerRadius(8)
-                        
-                        VStack {
-                            Button {
-                                bonjourClient.rewind15SecondsOnMac("key code 124")
-                            } label: {
-                                Image(systemName: "15.arrow.trianglehead.clockwise")
+                            .padding()
+                            .background(.gray)
+                            .cornerRadius(8)
+                            
+                            VStack {
+                                Button {
+                                    bonjourClient.increaseVolume()
+                                } label: {
+                                    Image(systemName: "speaker.wave.3.fill")
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
+                            .padding()
+                            .background(.gray)
+                            .cornerRadius(8)
                         }
-                        .padding()
-                        .background(.gray)
-                        .cornerRadius(8)
-                        
                     }
-                    HStack {
-                        VStack {
-                            Button {
-                                bonjourClient.decreaseVolume()
-                            } label: {
-                                Image(systemName: "speaker.wave.1.fill")
-                            }
-                            .buttonStyle(.plain)
-                        }
-                        .padding()
-                        .background(.gray)
-                        .cornerRadius(8)
-                        
-                        VStack {
-                            Button {
-                                bonjourClient.increaseVolume()
-                            } label: {
-                                Image(systemName: "speaker.wave.3.fill")
-                            }
-                            .buttonStyle(.plain)
-                        }
-                        .padding()
-                        .background(.gray)
-                        .cornerRadius(8)
+                    .buttonStyle(.borderedProminent)
+                    
+                } else {
+                    Button("Conectar a Mac") {
+                        bonjourClient.connectDirectly()
                     }
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
-                
-            } else {
-                Button("Conectar a Mac") {
-                    bonjourClient.connectDirectly()
-                }
-                .buttonStyle(.borderedProminent)
             }
+            .padding()
         }
-        .padding()
+        
     }
 }
 
@@ -140,29 +134,3 @@ struct ContentView: View {
     ContentView()
 }
 
-struct TrackpadView: View {
-    var onGesture: (String) -> Void
-    
-    var body: some View {
-        Rectangle()
-            .fill(Color.gray.opacity(0.8))
-            .gesture(
-                DragGesture()
-                    .onEnded { value in
-                        let dx = value.translation.width
-                        let dy = value.translation.height
-                        
-                        if abs(dx) > abs(dy) {
-                            onGesture(dx > 0 ? "right" : "left")
-                        } else {
-                            onGesture(dy > 0 ? "down" : "up")
-                        }
-                    }
-            )
-            .onTapGesture {
-                onGesture("click")
-            }
-            .frame(height: 300)
-            .cornerRadius(12)
-    }
-}
