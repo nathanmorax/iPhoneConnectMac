@@ -16,6 +16,8 @@ struct ContentView: View {
                 .padding()
                 .multilineTextAlignment(.center)
             
+            Text(bonjourClient.nameMac)
+            
             if bonjourClient.isConnected {
                 VStack(spacing: 15) {
                     Button("Apagar Mac") {
@@ -59,8 +61,7 @@ struct ContentView: View {
                     HStack {
                         VStack {
                             Button {
-                                isPlaying.toggle()
-                                bonjourClient.sendKeyCodeToMac("mouse click")
+                                bonjourClient.rewind15SecondsOnMac("key code 123")
                             } label: {
                                 Image(systemName: "15.arrow.trianglehead.counterclockwise")
                             }
@@ -85,8 +86,7 @@ struct ContentView: View {
                         
                         VStack {
                             Button {
-                                isPlaying.toggle()
-                                bonjourClient.sendKeyCodeToMac("mouse click")
+                                bonjourClient.rewind15SecondsOnMac("key code 124")
                             } label: {
                                 Image(systemName: "15.arrow.trianglehead.clockwise")
                             }
@@ -97,7 +97,31 @@ struct ContentView: View {
                         .cornerRadius(8)
                         
                     }
-
+                    HStack {
+                        VStack {
+                            Button {
+                                bonjourClient.decreaseVolume()
+                            } label: {
+                                Image(systemName: "speaker.wave.1.fill")
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding()
+                        .background(.gray)
+                        .cornerRadius(8)
+                        
+                        VStack {
+                            Button {
+                                bonjourClient.increaseVolume()
+                            } label: {
+                                Image(systemName: "speaker.wave.3.fill")
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding()
+                        .background(.gray)
+                        .cornerRadius(8)
+                    }
                 }
                 .buttonStyle(.borderedProminent)
                 

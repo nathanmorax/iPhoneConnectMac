@@ -12,6 +12,7 @@ import Combine
 class BonjourClient: ObservableObject {
     @Published var statusMessage: String = "Listo para conectar"
     @Published var isConnected: Bool = false
+    @Published var nameMac: String = ""
     
     private var connection: NWConnection?
     
@@ -22,6 +23,7 @@ class BonjourClient: ObservableObject {
         
         // Usar directamente el hostname y puerto que sabemos que funcionan
         let hostname = NWEndpoint.Host("MacBook-Pro-de-Administrador.local")
+        nameMac = hostname.debugDescription
         let port = NWEndpoint.Port(rawValue: 50505)!
         let endpoint = NWEndpoint.hostPort(host: hostname, port: port)
         
@@ -179,6 +181,22 @@ class BonjourClient: ObservableObject {
 
     func sendKeyCodeToMac(_ code: String) {
         send(message: code)
+    }
+    
+    func rewind15SecondsOnMac(_ code: String) {
+        send(message: code)
+    }
+    
+    func forward15SecondsOnMac(_ code: String) {
+        send(message: code)
+    }
+    
+    func increaseVolume() {
+        send(message: "volume up")
+    }
+    
+    func decreaseVolume() {
+        send(message: "volume down")
     }
 
     
