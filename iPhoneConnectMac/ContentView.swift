@@ -6,10 +6,9 @@
 //
 import SwiftUI
 
-import SwiftUI
-
 struct ContentView: View {
     @StateObject private var bonjourClient = BonjourClient()
+    @State private var isPlaying = false
     
     var body: some View {
         VStack(spacing: 20) {
@@ -36,14 +35,12 @@ struct ContentView: View {
                             bonjourClient.sendKeyCodeToMac("key code 124")
                         case "enter":
                             bonjourClient.sendKeyCodeToMac("key code 36")
-                        case "click":
-                            bonjourClient.sendKeyCodeToMac("mouse click")
                         default:
                             break
                         }
                     }
                     
-                    Button("Abrir Apple Music") {
+                    /*Button("Abrir Apple Music") {
                         bonjourClient.openAppleMusicOnMac()
                     }
                     
@@ -57,7 +54,50 @@ struct ContentView: View {
                     
                     Button("Enviar mensaje") {
                         bonjourClient.sendMessageToMac("Hola desde el iPhone!")
+                    }*/
+                    
+                    HStack {
+                        VStack {
+                            Button {
+                                isPlaying.toggle()
+                                bonjourClient.sendKeyCodeToMac("mouse click")
+                            } label: {
+                                Image(systemName: "15.arrow.trianglehead.counterclockwise")
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding()
+                        .background(.gray)
+                        .cornerRadius(8)
+                        
+                        HStack {
+                            Button {
+                                isPlaying.toggle()
+                                bonjourClient.sendKeyCodeToMac("mouse click")
+                            } label: {
+                                Image(systemName: isPlaying ? "pause.fill" : "play.fill")
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding(.all, 24)
+                        .background(.gray)
+                        .cornerRadius(8)
+                        
+                        VStack {
+                            Button {
+                                isPlaying.toggle()
+                                bonjourClient.sendKeyCodeToMac("mouse click")
+                            } label: {
+                                Image(systemName: "15.arrow.trianglehead.clockwise")
+                            }
+                            .buttonStyle(.plain)
+                        }
+                        .padding()
+                        .background(.gray)
+                        .cornerRadius(8)
+                        
                     }
+
                 }
                 .buttonStyle(.borderedProminent)
                 
@@ -70,6 +110,10 @@ struct ContentView: View {
         }
         .padding()
     }
+}
+
+#Preview {
+    ContentView()
 }
 
 struct TrackpadView: View {
