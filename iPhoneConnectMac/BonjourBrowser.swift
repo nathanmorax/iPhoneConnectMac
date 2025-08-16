@@ -13,6 +13,8 @@ class BonjourClient: ObservableObject {
     @Published var statusMessage: String = "Listo para conectar"
     @Published var isConnected: Bool = false
     @Published var nameMac: String = ""
+    @Published var currentVolume: Float = 0
+
     
     private var connection: NWConnection?
     
@@ -198,7 +200,6 @@ class BonjourClient: ObservableObject {
     func decreaseVolume() {
         send(message: "volume down")
     }
-
     
     deinit {
         disconnect()
