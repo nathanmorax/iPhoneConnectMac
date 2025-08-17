@@ -18,13 +18,12 @@ struct ContentView: View {
         ZStack {
             Color.black.ignoresSafeArea()
             VStack(spacing: 20) {
-                Text(bonjourClient.statusMessage)
-                    .padding()
+                Text("\(bonjourClient.statusMessage)\n\(bonjourClient.nameMac)")
+                    .padding(.all, 28)
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
-                
-                Text(bonjourClient.nameMac)
-                
+                    .background(Color.secondBackground)
+                    .cornerRadius(8)
                 
                 VStack(spacing: 38) {
                     
@@ -54,7 +53,7 @@ struct ContentView: View {
                          })*/
                         
                         HStack(spacing: 60) {
-                            MediaControlButton(systemImage: "wave.3.right", size: 80, shapeStyle: .circle, action: {
+                            MediaControlButton(systemImage: bonjourClient.isConnected ? "macbook.slash" : "macbook.and.iphone", shapeStyle: .circle, action: {
                                 bonjourClient.connectDirectly()
                             })
                             
@@ -64,8 +63,8 @@ struct ContentView: View {
                              bonjourClient.rewind15SecondsOnMac("key code 124")
                              })*/
                             
-                            MediaControlButton(systemImage: "speaker.wave.3.fill", size: 80, shapeStyle: .rounded(cornerRadius: 8)) {
-                                changeVolume(by: 15)
+                            MediaControlButton(systemImage: "speaker.wave.3.fill", shapeStyle: .rounded(cornerRadius: 8)) {
+                                changeVolume(by: 10)
                                 bonjourClient.increaseVolume()
                             }
                             
@@ -74,13 +73,13 @@ struct ContentView: View {
                         
                         HStack(spacing: 60) {
                             
-                            MediaControlButton(systemImage: isPlaying ? "pause.fill" : "play.fill", size: 80, shapeStyle: .rounded(cornerRadius: 8)) {
+                            MediaControlButton(systemImage: isPlaying ? "pause.fill" : "play.fill", shapeStyle: .rounded(cornerRadius: 8)) {
                                 isPlaying.toggle()
                                 bonjourClient.sendKeyCodeToMac("mouse click")
                             }
                             
-                            MediaControlButton(systemImage: "speaker.wave.1.fill", size: 80, shapeStyle: .rounded(cornerRadius: 8)) {
-                                changeVolume(by: -15)
+                            MediaControlButton(systemImage: "speaker.wave.1.fill", shapeStyle: .rounded(cornerRadius: 8)) {
+                                changeVolume(by: -10)
                                 bonjourClient.decreaseVolume()
                                 
                             }

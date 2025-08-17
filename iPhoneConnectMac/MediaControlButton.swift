@@ -14,7 +14,6 @@ struct MediaControlButton: View {
     }
     
     let systemImage: String
-    var size: CGFloat = 60
     var shapeStyle: ShapeStyle = .rounded(cornerRadius: 8)
     var action: () -> Void
     
@@ -23,12 +22,12 @@ struct MediaControlButton: View {
             Image(systemName: systemImage)
                 .resizable()
                 .scaledToFit()
-                .frame(width: size * 0.5, height: size * 0.5)
+                .frame(width: 90 * 0.5, height: 90 * 0.5)
                 .foregroundColor(.white)
-                .padding(size * 0.25)
+                .padding(90 * 0.25)
         }
         .background(Color.secondBackground)
-        .frame(width: size, height: size)
+        .frame(width: 90, height: 90)
         .modifier(ShapeModifier(style: shapeStyle))
         .buttonStyle(.plain)
     }
