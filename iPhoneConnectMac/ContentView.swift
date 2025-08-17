@@ -20,6 +20,7 @@ struct ContentView: View {
             VStack(spacing: 20) {
                 Text(bonjourClient.statusMessage)
                     .padding()
+                    .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                 
                 Text(bonjourClient.nameMac)
@@ -49,15 +50,11 @@ struct ContentView: View {
                         }
                         
                         HStack(spacing: 24) {
-                            VStack {
-                                Button {
-                                    bonjourClient.rewind15SecondsOnMac("key code 123")
-                                } label: {
-                                    Image(systemName: "15.arrow.trianglehead.counterclockwise")
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            .padding()
+                            
+                            RewindButtonView(systemImage: "15.arrow.trianglehead.counterclockwise", action: {
+                                bonjourClient.rewind15SecondsOnMac("key code 123")
+                            })
+                            
                             
                             
                             HStack {
@@ -66,7 +63,7 @@ struct ContentView: View {
                                     bonjourClient.sendKeyCodeToMac("mouse click")
                                 } label: {
                                     Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                                        .resizable() // permite ajustar el tamaño libremente
+                                        .resizable()
                                         .aspectRatio(contentMode: .fit)
                                         .frame(width: 36, height: 36)
                                     
@@ -156,22 +153,4 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-}
-
-
-
-struct VolumeOverlay: View {
-    var volume: Float // 0.0 a 1.0
-    
-    var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: volume == 0 ? "speaker.slash.fill" :
-                    (volume < 0.5 ? "speaker.wave.1.fill" : "speaker.wave.3.fill"))
-            .font(.system(size: 40))
-            .foregroundColor(.white)
-        }
-        .padding(.all, 38)
-        //.background(.black.opacity(0.7))
-        .cornerRadius(12)
-    }
 }

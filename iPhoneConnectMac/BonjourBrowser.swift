@@ -26,7 +26,7 @@ class BonjourClient: ObservableObject {
         // Usar directamente el hostname y puerto que sabemos que funcionan
         let hostname = NWEndpoint.Host("MacBook-Pro-de-Administrador.local")
         nameMac = hostname.debugDescription
-        let port = NWEndpoint.Port(rawValue: 50505)!
+        let port = NWEndpoint.Port(rawValue: 50506)!
         let endpoint = NWEndpoint.hostPort(host: hostname, port: port)
         
         // Configurar parámetros TCP
