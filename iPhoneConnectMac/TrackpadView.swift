@@ -11,7 +11,7 @@ struct TrackpadView: View {
     
     var body: some View {
         Rectangle()
-            .fill(Color.gray.opacity(0.8))
+            .fill(Color.secondBackGround)
             .gesture(
                 DragGesture()
                     .onEnded { value in

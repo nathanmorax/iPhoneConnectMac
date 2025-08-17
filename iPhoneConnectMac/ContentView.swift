@@ -25,87 +25,71 @@ struct ContentView: View {
                 
                 Text(bonjourClient.nameMac)
                 
-              //  if bonjourClient.isConnected {
+                
+                VStack(spacing: 38) {
+                    
+                    
+                    // Trackpad integrado con función de gesto
+                    TrackpadView { gesture in
+                        switch gesture {
+                        case "up":
+                            bonjourClient.sendKeyCodeToMac("key code 126")
+                        case "down":
+                            bonjourClient.sendKeyCodeToMac("key code 125")
+                        case "left":
+                            bonjourClient.sendKeyCodeToMac("key code 123")
+                        case "right":
+                            bonjourClient.sendKeyCodeToMac("key code 124")
+                        case "enter":
+                            bonjourClient.sendKeyCodeToMac("key code 36")
+                        default:
+                            break
+                        }
+                    }
+                    
                     VStack(spacing: 24) {
-                        Button("Apagar Mac") {
-                            bonjourClient.sendShutdown()
-                        }
                         
-                        // Trackpad integrado con función de gesto
-                        TrackpadView { gesture in
-                            switch gesture {
-                            case "up":
-                                bonjourClient.sendKeyCodeToMac("key code 126")
-                            case "down":
-                                bonjourClient.sendKeyCodeToMac("key code 125")
-                            case "left":
-                                bonjourClient.sendKeyCodeToMac("key code 123")
-                            case "right":
-                                bonjourClient.sendKeyCodeToMac("key code 124")
-                            case "enter":
-                                bonjourClient.sendKeyCodeToMac("key code 36")
-                            default:
-                                break
-                            }
-                        }
+                        /*MediaControlButton(systemImage: "15.arrow.trianglehead.counterclockwise", action: {
+                         bonjourClient.rewind15SecondsOnMac("key code 123")
+                         })*/
                         
-                        HStack(spacing: 24) {
-                            
-                            MediaControlButton(systemImage: "15.arrow.trianglehead.counterclockwise", action: {
-                                bonjourClient.rewind15SecondsOnMac("key code 123")
+                        HStack(spacing: 60) {
+                            MediaControlButton(systemImage: "wave.3.right", size: 80, shapeStyle: .circle, action: {
+                                bonjourClient.connectDirectly()
                             })
                             
                             
+                            
+                            /*MediaControlButton(systemImage: "15.arrow.trianglehead.clockwise", action: {
+                             bonjourClient.rewind15SecondsOnMac("key code 124")
+                             })*/
+                            
+                            MediaControlButton(systemImage: "speaker.wave.3.fill", size: 80, shapeStyle: .rounded(cornerRadius: 8)) {
+                                changeVolume(by: 15)
+                                bonjourClient.increaseVolume()
+                            }
+                            
+                            
+                        }
+                        
+                        HStack(spacing: 60) {
                             
                             MediaControlButton(systemImage: isPlaying ? "pause.fill" : "play.fill", size: 80, shapeStyle: .rounded(cornerRadius: 8)) {
                                 isPlaying.toggle()
                                 bonjourClient.sendKeyCodeToMac("mouse click")
                             }
                             
-                            MediaControlButton(systemImage: "15.arrow.trianglehead.clockwise", action: {
-                                bonjourClient.rewind15SecondsOnMac("key code 124")
-                            })
+                            MediaControlButton(systemImage: "speaker.wave.1.fill", size: 80, shapeStyle: .rounded(cornerRadius: 8)) {
+                                changeVolume(by: -15)
+                                bonjourClient.decreaseVolume()
+                                
+                            }
                             
                         }
                         
-                        
-                        
-                        HStack {
-                            VStack {
-                                Button {
-                                    changeVolume(by: -15)
-                                    bonjourClient.decreaseVolume()
-                                } label: {
-                                    Image(systemName: "speaker.wave.1.fill")
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            .padding()
-                            .background(.gray)
-                            .cornerRadius(8)
-                            
-                            VStack {
-                                Button {
-                                    changeVolume(by: 15)
-                                    bonjourClient.increaseVolume()
-                                } label: {
-                                    Image(systemName: "speaker.wave.3.fill")
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            .padding()
-                            .background(.gray)
-                            .cornerRadius(8)
-                        }
                     }
-                    .buttonStyle(.borderedProminent)
-                    
-              //  } else {
-                 /*   Button("Conectar a Mac") {
-                        bonjourClient.connectDirectly()
-                    }
-                    .buttonStyle(.borderedProminent)
-               // }*/
+                }
+                .buttonStyle(.borderedProminent)
             }
             .padding()
             

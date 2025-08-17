@@ -27,7 +27,7 @@ struct MediaControlButton: View {
                 .foregroundColor(.white)
                 .padding(size * 0.25)
         }
-        .background(.gray)
+        .background(Color.secondBackground)
         .frame(width: size, height: size)
         .modifier(ShapeModifier(style: shapeStyle))
         .buttonStyle(.plain)
