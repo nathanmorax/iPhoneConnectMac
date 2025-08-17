@@ -25,8 +25,8 @@ struct ContentView: View {
                 
                 Text(bonjourClient.nameMac)
                 
-                if bonjourClient.isConnected {
-                    VStack(spacing: 15) {
+              //  if bonjourClient.isConnected {
+                    VStack(spacing: 24) {
                         Button("Apagar Mac") {
                             bonjourClient.sendShutdown()
                         }
@@ -51,42 +51,22 @@ struct ContentView: View {
                         
                         HStack(spacing: 24) {
                             
-                            RewindButtonView(systemImage: "15.arrow.trianglehead.counterclockwise", action: {
+                            MediaControlButton(systemImage: "15.arrow.trianglehead.counterclockwise", action: {
                                 bonjourClient.rewind15SecondsOnMac("key code 123")
                             })
                             
                             
                             
-                            HStack {
-                                Button {
-                                    isPlaying.toggle()
-                                    bonjourClient.sendKeyCodeToMac("mouse click")
-                                } label: {
-                                    Image(systemName: isPlaying ? "pause.fill" : "play.fill")
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 36, height: 36)
-                                    
-                                }
-                                .buttonStyle(.plain)
+                            MediaControlButton(systemImage: isPlaying ? "pause.fill" : "play.fill", size: 80, shapeStyle: .rounded(cornerRadius: 8)) {
+                                isPlaying.toggle()
+                                bonjourClient.sendKeyCodeToMac("mouse click")
                             }
                             
-                            
-                            VStack {
-                                Button {
-                                    bonjourClient.rewind15SecondsOnMac("key code 124")
-                                } label: {
-                                    Image(systemName: "15.arrow.trianglehead.clockwise")
-                                }
-                                .buttonStyle(.plain)
-                            }
-                            .padding()
+                            MediaControlButton(systemImage: "15.arrow.trianglehead.clockwise", action: {
+                                bonjourClient.rewind15SecondsOnMac("key code 124")
+                            })
                             
                         }
-                        .padding(.vertical, 14)
-                        .padding(.horizontal, 40)
-                        .background(.gray)
-                        .cornerRadius(8)
                         
                         
                         
@@ -120,12 +100,12 @@ struct ContentView: View {
                     }
                     .buttonStyle(.borderedProminent)
                     
-                } else {
-                    Button("Conectar a Mac") {
+              //  } else {
+                 /*   Button("Conectar a Mac") {
                         bonjourClient.connectDirectly()
                     }
                     .buttonStyle(.borderedProminent)
-                }
+               // }*/
             }
             .padding()
             
