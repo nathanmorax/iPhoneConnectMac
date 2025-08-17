@@ -54,7 +54,7 @@ struct ContentView: View {
                         
                         HStack(spacing: 60) {
                             MediaControlButton(systemImage: bonjourClient.isConnected ? "macbook.slash" : "macbook.and.iphone", shapeStyle: .circle, action: {
-                                bonjourClient.connectDirectly()
+                                bonjourClient.toggleConnection()
                             })
                             
                             
@@ -112,6 +112,7 @@ struct ContentView: View {
             }
         }
     }
+
 }
 
 #Preview {

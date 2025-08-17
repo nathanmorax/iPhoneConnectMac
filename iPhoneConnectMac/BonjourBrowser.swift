@@ -148,11 +148,21 @@ class BonjourClient: ObservableObject {
         send(message: "restart")
     }
     
-    func disconnect() {
+    private func disconnect() {
         connection?.cancel()
         connection = nil
         isConnected = false
         statusMessage = "Desconectado"
+    }
+    
+    func toggleConnection() {
+        withAnimation {
+            if isConnected {
+                disconnect()
+            } else {
+                connectDirectly()
+            }
+        }
     }
     
     func sendMessageToMac(_ mensaje: String = "Hola desde el iPhone") {
