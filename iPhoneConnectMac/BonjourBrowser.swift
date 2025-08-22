@@ -8,6 +8,7 @@
 import SwiftUI
 import Network
 import Combine
+import Foundation
 
 class BonjourClient: ObservableObject {
     @Published var statusMessage: String = "Listo para conectar"
@@ -19,14 +20,14 @@ class BonjourClient: ObservableObject {
     private var connection: NWConnection?
     
     func connectDirectly() {
-        disconnect() // Limpiar conexiones previas
+        disconnect()
         
         statusMessage = "🔌 Conectando a Mac..."
         
         // Usar directamente el hostname y puerto que sabemos que funcionan
-        let hostname = NWEndpoint.Host("MacBook-Pro-de-Administrador.local")
+        let hostname = NWEndpoint.Host("Laptop-de-Jesus.local")
         nameMac = hostname.debugDescription
-        let port = NWEndpoint.Port(rawValue: 50506)!
+        let port = NWEndpoint.Port(rawValue: 50507)!
         let endpoint = NWEndpoint.hostPort(host: hostname, port: port)
         
         // Configurar parámetros TCP
@@ -50,7 +51,7 @@ class BonjourClient: ObservableObject {
                     self?.statusMessage = "🔧 Preparando conexión..."
                     
                 case .ready:
-                    self?.statusMessage = "🎉 ¡Conectado a la Mac!"
+                    self?.statusMessage = "¡Conectado a la Mac!"
                     self?.isConnected = true
                     self?.sendPing()
                     
@@ -77,7 +78,7 @@ class BonjourClient: ObservableObject {
                     }
                     
                 case .cancelled:
-                    self?.statusMessage = "🚫 Conexión cancelada"
+                    self?.statusMessage = "Desconectado"
                     self?.isConnected = false
                     
                 @unknown default:
@@ -152,7 +153,6 @@ class BonjourClient: ObservableObject {
         connection?.cancel()
         connection = nil
         isConnected = false
-        statusMessage = "Desconectado"
     }
     
     func toggleConnection() {
@@ -170,10 +170,6 @@ class BonjourClient: ObservableObject {
         send(message: comando)
     }
     
-    func sendMScrolloMac(_ mensaje: String = "Hola desde el iPhone") {
-        let comando = "say \(mensaje)"
-        send(message: comando)
-    }
     
     func sendCloseAppMac() {
         send(message: "exit")
@@ -181,6 +177,10 @@ class BonjourClient: ObservableObject {
 
     func openAppleMusicOnMac() {
         send(message: "open music")
+    }
+    
+    func openSafariOnMac() {
+        send(message: "opensafari")
     }
 
     func closeAppleMusicOnMac() {
@@ -210,6 +210,7 @@ class BonjourClient: ObservableObject {
     func decreaseVolume() {
         send(message: "volume down")
     }
+    
     
     deinit {
         disconnect()

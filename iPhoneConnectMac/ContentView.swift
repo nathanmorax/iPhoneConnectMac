@@ -32,13 +32,11 @@ struct ContentView: View {
                     TrackpadView { gesture in
                         switch gesture {
                         case "up":
-                            bonjourClient.sendKeyCodeToMac("key code 126")
+                            bonjourClient.sendKeyCodeToMac("previousCard")
                         case "down":
-                            bonjourClient.sendKeyCodeToMac("key code 125")
-                        case "left":
-                            bonjourClient.sendKeyCodeToMac("key code 123")
-                        case "right":
-                            bonjourClient.sendKeyCodeToMac("key code 124")
+                            bonjourClient.sendKeyCodeToMac("nextCard")
+                        case "enter":
+                            bonjourClient.sendKeyCodeToMac("selectCard")
                         case "enter":
                             bonjourClient.sendKeyCodeToMac("key code 36")
                         default:
@@ -84,13 +82,17 @@ struct ContentView: View {
                                 
                             }
                             
+                            MediaControlButton(systemImage: "file", shapeStyle: .rounded(cornerRadius: 8)) {
+                                bonjourClient.openSafariOnMac()
+                                
+                            }
                         }
                         
                     }
                 }
                 .buttonStyle(.borderedProminent)
             }
-            .padding()
+            .padding(.all, 24)
             
             if showVolumeOverlay {
                 VolumeOverlay(volume: currentVolume)
@@ -112,7 +114,7 @@ struct ContentView: View {
             }
         }
     }
-
+    
 }
 
 #Preview {
