@@ -12,7 +12,7 @@ struct iPhoneConnectMacApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            PlayerView()
         }
     }
 }

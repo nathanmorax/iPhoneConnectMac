@@ -82,10 +82,10 @@ struct ContentView: View {
                                 
                             }
                             
-                            MediaControlButton(systemImage: "file", shapeStyle: .rounded(cornerRadius: 8)) {
+                            /*MediaControlButton(systemImage: "file", shapeStyle: .rounded(cornerRadius: 8)) {
                                 bonjourClient.openSafariOnMac()
                                 
-                            }
+                            }*/
                         }
                         
                     }
