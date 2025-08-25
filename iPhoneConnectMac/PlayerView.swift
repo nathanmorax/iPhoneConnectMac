@@ -13,18 +13,19 @@ enum RemoteAction: CaseIterable, Hashable {
     case toggleConnection
     
     
-    var iconName: String {
+    func iconName(viewModel: RemoteControlViewModel) -> String {
         switch self {
         case .playPause:
-            return "play.fill"
+            return viewModel.isPlaying ? "play.fill" : "pause.fill"
         case .rewind15:
             return "15.arrow.trianglehead.counterclockwise"
         case .forward15:
             return "15.arrow.trianglehead.clockwise"
         case .toggleConnection:
-            return "macbook.slash"
+            return viewModel.isConnecting ? "macbook" : "macbook.slash"
         }
     }
+    
     var foregroundColor: Color {
         self == .toggleConnection ? .black : .white
     }
@@ -44,7 +45,6 @@ enum RemoteAction: CaseIterable, Hashable {
             viewModel.forward()
         case .toggleConnection:
             viewModel.toggleConnection()
-            print("Conectando")
         }
         
     }
@@ -78,7 +78,7 @@ struct PlayerView: View {
                         Button {
                             action.remoteAction(viewModel: viewModel)
                         } label: {
-                            Image(systemName: action.iconName)
+                            Image(systemName: action.iconName(viewModel: viewModel))
                                 .font(.title2)
                                 .foregroundColor(action.foregroundColor)
 
