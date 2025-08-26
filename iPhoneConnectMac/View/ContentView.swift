@@ -6,7 +6,7 @@
 //
 import SwiftUI
 
-struct ContentView: View {
+/*struct ContentView: View {
     @StateObject private var bonjourClient = BonjourClient()
     @State private var isPlaying = false
     
@@ -46,9 +46,9 @@ struct ContentView: View {
                     
                     VStack(spacing: 24) {
                         
-                        /*MediaControlButton(systemImage: "15.arrow.trianglehead.counterclockwise", action: {
+                        MediaControlButton(systemImage: "15.arrow.trianglehead.counterclockwise", action: {
                          bonjourClient.rewind15SecondsOnMac("key code 123")
-                         })*/
+                         })
                         
                         HStack(spacing: 60) {
                             MediaControlButton(systemImage: bonjourClient.isConnected ? "macbook.slash" : "macbook.and.iphone", shapeStyle: .circle, action: {
@@ -57,9 +57,9 @@ struct ContentView: View {
                             
                             
                             
-                            /*MediaControlButton(systemImage: "15.arrow.trianglehead.clockwise", action: {
+                            MediaControlButton(systemImage: "15.arrow.trianglehead.clockwise", action: {
                              bonjourClient.rewind15SecondsOnMac("key code 124")
-                             })*/
+                             })
                             
                             MediaControlButton(systemImage: "speaker.wave.3.fill", shapeStyle: .rounded(cornerRadius: 8)) {
                                 changeVolume(by: 10)
@@ -82,10 +82,10 @@ struct ContentView: View {
                                 
                             }
                             
-                            /*MediaControlButton(systemImage: "file", shapeStyle: .rounded(cornerRadius: 8)) {
+                            MediaControlButton(systemImage: "file", shapeStyle: .rounded(cornerRadius: 8)) {
                                 bonjourClient.openSafariOnMac()
                                 
-                            }*/
+                            }
                         }
                         
                     }
@@ -117,6 +117,4 @@ struct ContentView: View {
     
 }
 
-#Preview {
-    ContentView()
-}
+*/

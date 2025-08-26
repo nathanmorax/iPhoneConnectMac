@@ -1,5 +1,5 @@
 //
-//  BonjourBrowser.swift
+//  BonjourClient.swift
 //  iPhoneConnectMac
 //
 //  Created by Jonathan Mora on 10/08/25.

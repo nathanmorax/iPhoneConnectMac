@@ -15,7 +15,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				RemoteAction.swift,
+				Model/RemoteAction.swift,
 			);
 			target = 2D5811D32E49A326001273B2 /* iPhoneConnectMac */;
 		};
@@ -26,7 +26,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 2D5811D22E49A326001273B2 /* Resources */;
 			membershipExceptions = (
-				RemoteAction.swift,
+				Model/RemoteAction.swift,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
