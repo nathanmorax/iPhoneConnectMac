@@ -8,7 +8,6 @@
 import SwiftUI
 import Network
 import Combine
-import Foundation
 import OSLog
 
 
@@ -146,12 +145,20 @@ extension BonjourClient {
         sendMessage(code)
     }
     
-    func rewind15SecondsOnMac(_ code: String) {
-        sendMessage(code)
+    func rewind15SecondsOnMac() {
+        sendCommand(.rewind)
     }
     
-    func forward15SecondsOnMac(_ code: String) {
-        sendMessage(code)
+    func forward15SecondsOnMac() {
+        sendCommand(.forward)
+    }
+    
+    func sendSpacebar() {
+        sendCommand(.spacebar)
+    }
+    
+    func playPauseOnMac() {
+        sendCommand(.playPause)
     }
 }
 
@@ -318,3 +325,4 @@ private extension BonjourClient {
     }
     
 }
+

@@ -15,28 +15,16 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				Model/RemoteAction.swift,
 			);
 			target = 2D5811D32E49A326001273B2 /* iPhoneConnectMac */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		BADDB8692E5D0D9600891157 /* Exceptions for "iPhoneConnectMac" folder in "Copy Bundle Resources" phase from "iPhoneConnectMac" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 2D5811D22E49A326001273B2 /* Resources */;
-			membershipExceptions = (
-				Model/RemoteAction.swift,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		2D5811D62E49A326001273B2 /* iPhoneConnectMac */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				2D5811E72E49A936001273B2 /* Exceptions for "iPhoneConnectMac" folder in "iPhoneConnectMac" target */,
-				BADDB8692E5D0D9600891157 /* Exceptions for "iPhoneConnectMac" folder in "Copy Bundle Resources" phase from "iPhoneConnectMac" target */,
 			);
 			path = iPhoneConnectMac;
 			sourceTree = "<group>";

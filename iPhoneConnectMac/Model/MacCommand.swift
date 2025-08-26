@@ -7,6 +7,13 @@
 import Foundation
 
 enum MacCommand: String {
+    
+    case spacebar = "spacebar"
+    case playPause = "mouse click"
+    case rewind = "key code 123"
+    case forward = "key code 124"
+    
+    
     case ping = "ping"
     case shutdown = "shutdown"
     case restart = "restart"
@@ -17,6 +24,8 @@ enum MacCommand: String {
     case playMusic = "play music"
     case volumeUp = "volume up"
     case volumeDown = "volume down"
+    
+     
     
     case say = "say"
     
