@@ -4,30 +4,27 @@
 //
 //  Created by Jesus Mora on 14/08/25.
 //
-import SwiftUI
+import Foundation
 
 enum NetworkError: LocalizedError {
-    case connectionRefused
+    case invalidPort
+    case serverNotResponding
     case hostNotFound
-    case timeout
-    case sendFailed(String)
-    case encodingFailed
-    case unknown(String)
+    case connectionTimeout
+    case unknownState
     
     var errorDescription: String? {
         switch self {
-        case .connectionRefused:
-            return "❌ Servidor no responde - ¿está ejecutándose?"
+        case .invalidPort:
+            return "Puerto de conexión inválido"
+        case .serverNotResponding:
+            return "Servidor no responde - ¿está ejecutándose?"
         case .hostNotFound:
-            return "❌ Mac no encontrada en la red"
-        case .timeout:
-            return "❌ Timeout - conexión muy lenta"
-        case .sendFailed(let message):
-            return "❌ Error enviando: \(message)"
-        case .encodingFailed:
-            return "❌ Error codificando mensaje"
-        case .unknown(let message):
-            return "❌ Error: \(message)"
+            return "Mac no encontrada en la red"
+        case .connectionTimeout:
+            return "Timeout - conexión muy lenta"
+        case .unknownState:
+            return "Estado de conexión desconocido"
         }
     }
 }
