@@ -11,46 +11,26 @@ struct PlayerView: View {
     @State private var totalTime: Double = 204
     @State private var dragOffset: CGFloat = 0
     @State var viewModel = RemoteControlViewModel()
+    @State private var dominantColor: Color = .white
+    
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            Color.colorBackground.ignoresSafeArea()
             
-            VStack(spacing: 20) {
-                Spacer()
+            VStack {
                 
-                CoverMovieAlbum(dragOffset: dragOffset)
-                
-                Spacer().frame(height: 40)
-                
-                NowPlayingInfoView()
-                
-                // Barra de progreso
-                
-                ProgressBar(progressWidth: progressWidth, currentTime: currentTime, totalTime: totalTime)
-                
-                // Controles de reproducción
-                HStack(spacing: 16) {
-                    ForEach(RemoteAction.allCases, id: \.self) { action in
-                        Button {
-                            action.remoteAction(viewModel: viewModel)
-                        } label: {
-                            Image(systemName: action.iconName(viewModel: viewModel))
-                                .font(.title2)
-                                .foregroundColor(action.foregroundColor)
-
-                        }
-                        //.disabled(viewModel.shouldDisableButton(action))
-                        .padding()
-                        .background(Circle().fill(action.backgroundColor))
-
-                    }
+                VStack {
+                    MediaControlPanel(progressWidth: progressWidth, currentTime: currentTime, totalTime: totalTime, viewModel: viewModel)
                 }
+                .padding(.all, 60)
+
                 
+                ClickWheelView()
+
                 
-                .padding(.horizontal)
-                
-                Spacer().frame(height: 60)
             }
+            .padding()
+            
         }
         .gesture(
             DragGesture()
@@ -63,9 +43,7 @@ struct PlayerView: View {
                     }
                 }
         )
-        .onAppear {
-            startProgressSimulation()
-        }
+        
     }
     
     // Calcula el ancho de la barra de progreso
@@ -85,7 +63,7 @@ struct PlayerView: View {
         }
     }
     
-
+    
 }
 
 // Vista de controles de reproducción principal (para agregar si quieres)
