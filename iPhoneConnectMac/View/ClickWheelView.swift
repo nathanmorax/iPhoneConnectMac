@@ -8,6 +8,7 @@ import SwiftUI
 
 struct ClickWheelView: View {
     @State private var angle: Double = 0.0
+    var viewModel: RemoteControlViewModel
     
     var body: some View {
         ZStack {
@@ -31,11 +32,17 @@ struct ClickWheelView: View {
                 Image(systemName: "tv.badge.wifi")
                     .font(.title3)
                     .foregroundColor(.colorWheelIcon)
+                    .onTapGesture {
+                        viewModel.toggleConnection()
+                    }
                 Spacer()
                 // Abajo -> Play/Pause
                 Image(systemName: "playpause.fill")
                     .font(.title3)
                     .foregroundColor(.colorWheelIcon)
+                    .onTapGesture {
+                        viewModel.togglePlay()
+                    }
             }
             .frame(height: 220)
             
@@ -44,11 +51,17 @@ struct ClickWheelView: View {
                 Image(systemName: "backward.fill")
                     .font(.title3)
                     .foregroundColor(.colorWheelIcon)
+                    .onTapGesture {
+                        viewModel.rewind()
+                    }
                 Spacer()
                 // Derecha -> Forward
                 Image(systemName: "forward.fill")
                     .font(.title3)
                     .foregroundColor(.colorWheelIcon)
+                    .onTapGesture {
+                        viewModel.forward()
+                    }
             }
             .frame(width: 220)
             
@@ -67,6 +80,6 @@ struct ClickWheelView: View {
 
 struct ClickWheelView_Previews: PreviewProvider {
     static var previews: some View {
-        ClickWheelView()
+        ClickWheelView(viewModel: RemoteControlViewModel())
     }
 }

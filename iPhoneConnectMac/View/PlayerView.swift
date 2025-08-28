@@ -25,7 +25,7 @@ struct PlayerView: View {
                 .padding(.all, 60)
 
                 
-                ClickWheelView()
+                ClickWheelView(viewModel: viewModel)
 
                 
             }
