@@ -11,7 +11,7 @@ struct MediaControlPanel: View {
     var progressWidth: Double
     var currentTime: Double
     var totalTime: Double
-    var viewModel: RemoteControlViewModel
+    @Bindable var viewModel: RemoteControlViewModel
     
     var body: some View {
         

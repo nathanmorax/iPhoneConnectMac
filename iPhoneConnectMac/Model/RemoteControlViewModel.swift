@@ -5,6 +5,7 @@
 //  Created by Jesus Mora on 25/08/25.
 //
 import SwiftUI
+import Observation
 
 @Observable
 class RemoteControlViewModel {
